@@ -10,7 +10,7 @@ import { Activity } from "@/account/domain/activity";
  * - ActivityWindow를 통해 최근 활동만 메모리에 유지
  */
 export class Account {
-  private readonly id: AccountId | null;
+  private readonly _id: AccountId | null;
 
   private readonly baselineBalance: Money;
 
@@ -21,7 +21,7 @@ export class Account {
     baselineBalance: Money,
     activityWindow: ActivityWindow,
   ) {
-    this.id = id;
+    this._id = id;
     this.baselineBalance = baselineBalance;
     this.activityWindow = activityWindow;
   }
@@ -47,13 +47,13 @@ export class Account {
    * = baselineBalance + activityWindow의 잔액
    */
   calculateBalance(): Money {
-    if (!this.id) {
+    if (!this._id) {
       throw new Error("Cannot calculate balance for account without ID");
     }
 
     return Money.add(
       this.baselineBalance,
-      this.activityWindow.calculateBalance(this.id),
+      this.activityWindow.calculateBalance(this._id),
     );
   }
 
@@ -68,8 +68,8 @@ export class Account {
     }
 
     const withdrawal = Activity.withoutId(
-      this.id!,
-      this.id!,
+      this._id!,
+      this._id!,
       targetAccountId,
       new Date(),
       money,
@@ -96,14 +96,18 @@ export class Account {
    */
   deposit(money: Money, sourceAccountId: AccountId): boolean {
     const deposit = Activity.withoutId(
-      this.id!,
+      this._id!,
       sourceAccountId,
-      this.id!,
+      this._id!,
       new Date(),
       money,
     );
 
     this.activityWindow.addActivity(deposit);
     return true;
+  }
+
+  public getId(): AccountId | null {
+    return this._id;
   }
 }

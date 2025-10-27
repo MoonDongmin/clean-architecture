@@ -5,7 +5,6 @@ node_modules
 **/CLAUDE.md
 
 # output
-out
 dist
 *.tgz
 
