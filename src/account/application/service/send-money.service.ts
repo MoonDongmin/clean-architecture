@@ -1,10 +1,10 @@
 import { SendMoneyUseCase } from "@/account/application/port/in/send-money.usecase";
 import { SendMoneyCommand } from "@/account/application/port/in/send-money.command";
-import { Inject, Injectable } from "@nestjs/common";
+import { Inject } from "@nestjs/common";
 import {
   LOAD_ACCOUNT_PORT,
   type LoadAccountPort,
-}                           from "@/account/application/port/out/load-account.port";
+} from "@/account/application/port/out/load-account.port";
 import {
   ACCOUNT_LOCK,
   type AccountLock,
@@ -17,13 +17,14 @@ import { MoneyTransferProperties } from "@/account/application/service/money-tra
 import { ThresholdExceededException } from "@/account/application/service/threshold-exceeded.exception";
 import { Account } from "@/account/domain/account";
 import { AccountId } from "@/account/domain/value-object/account-id";
+import { UseCase } from "@/common/decorators/use-case.decorator";
 
 /**
  * SendMoneyService (Use Case Implementation)
  * - 송금 비즈니스 로직 구현
  * - Transaction 관리
  */
-@Injectable()
+@UseCase()
 export class SendMoneyService implements SendMoneyUseCase {
   constructor(
     @Inject(LOAD_ACCOUNT_PORT)

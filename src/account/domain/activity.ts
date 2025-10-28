@@ -1,7 +1,6 @@
 import { ActivityId } from "@/account/domain/value-object/activity-id";
 import { AccountId } from "@/account/domain/value-object/account-id";
 import { Money } from "@/account/domain/value-object/money";
-import { timestamp } from "rxjs";
 
 /**
  * Activity 엔티티

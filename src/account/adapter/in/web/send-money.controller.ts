@@ -1,4 +1,4 @@
-import { Controller, Inject, Param, ParseIntPipe, Post } from "@nestjs/common";
+import { Inject, Param, ParseIntPipe, Post } from "@nestjs/common";
 import {
   SEND_MONEY_USE_CASE,
   type SendMoneyUseCase,
@@ -6,12 +6,13 @@ import {
 import { SendMoneyCommand } from "@/account/application/port/in/send-money.command";
 import { AccountId } from "@/account/domain/value-object/account-id";
 import { Money } from "@/account/domain/value-object/money";
+import { WebAdapter } from "@/common/decorators/web-adapter.decorator";
 
 /**
  * SendMoneyController
  * - REST API 엔드포인트
  */
-@Controller("accounts")
+@WebAdapter("accounts")
 export class SendMoneyController {
   constructor(
     @Inject(SEND_MONEY_USE_CASE)
