@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { NotFoundException } from "@nestjs/common";
 import { LoadAccountPort } from "@/account/application/port/out/load-account.port";
 import { UpdateAccountStatePort } from "@/account/application/port/out/update-account-state.port";
 import { AccountId } from "@/account/domain/value-object/account-id";
@@ -7,13 +7,14 @@ import { AccountRepository } from "@/account/adapter/out/persistence/repository/
 import { ActivityRepository } from "@/account/adapter/out/persistence/repository/activity.repository";
 import { AccountMapper } from "@/account/adapter/out/persistence/mapper/account.mapper";
 import { AccountEntity } from "@/account/adapter/out/persistence/entity/account.entity";
+import { PersistenceAdapter } from "@/common/decorators/persistence-adapter.decorator";
 
 /**
  * AccountPersistenceAdapter
  * - LoadAccountPort, UpdateAccountStatePort 구현
  * - TypeORM을 사용한 영속성 관리
  */
-@Injectable()
+@PersistenceAdapter()
 export class AccountPersistenceAdapter
   implements LoadAccountPort, UpdateAccountStatePort
 {

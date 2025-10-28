@@ -1,4 +1,4 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Inject } from "@nestjs/common";
 import { GetAccountBalanceQuery } from "@/account/application/port/in/get-account-balance.query";
 import {
   LOAD_ACCOUNT_PORT,
@@ -6,8 +6,9 @@ import {
 } from "@/account/application/port/out/load-account.port";
 import { Money } from "@/account/domain/value-object/money";
 import { AccountId } from "@/account/domain/value-object/account-id";
+import { UseCase } from "@/common/decorators/use-case.decorator";
 
-@Injectable()
+@UseCase()
 export class GetAccountBalanceService implements GetAccountBalanceQuery {
   constructor(
     @Inject(LOAD_ACCOUNT_PORT)

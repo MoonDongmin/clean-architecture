@@ -1,5 +1,6 @@
 import { AccountId } from "@/account/domain/value-object/account-id";
 import { Money } from "@/account/domain/value-object/money";
+
 /**
  * GetAccountBalanceQuery (Incoming Port)
  * - 잔액 조회 Query 인터페이스
