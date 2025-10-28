@@ -7,6 +7,8 @@ node_modules
 # output
 dist
 *.tgz
+ARCHITECTURE.md
+**/.gitignore
 
 # code coverage
 coverage

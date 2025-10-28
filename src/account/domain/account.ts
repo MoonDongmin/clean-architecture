@@ -14,7 +14,7 @@ export class Account {
 
   private readonly baselineBalance: Money;
 
-  private readonly activityWindow: ActivityWindow;
+  private readonly _activityWindow: ActivityWindow;
 
   constructor(
     id: AccountId | null,
@@ -23,7 +23,7 @@ export class Account {
   ) {
     this._id = id;
     this.baselineBalance = baselineBalance;
-    this.activityWindow = activityWindow;
+    this._activityWindow = activityWindow;
   }
 
   // 팩터리 메서드
@@ -53,7 +53,7 @@ export class Account {
 
     return Money.add(
       this.baselineBalance,
-      this.activityWindow.calculateBalance(this._id),
+      this._activityWindow.calculateBalance(this._id),
     );
   }
 
@@ -75,7 +75,7 @@ export class Account {
       money,
     );
 
-    this.activityWindow.addActivity(withdrawal);
+    this._activityWindow.addActivity(withdrawal);
     return true;
   }
 
@@ -103,11 +103,15 @@ export class Account {
       money,
     );
 
-    this.activityWindow.addActivity(deposit);
+    this._activityWindow.addActivity(deposit);
     return true;
   }
 
   public getId(): AccountId | null {
     return this._id;
+  }
+
+  public getActivityWindow(): ActivityWindow {
+    return this._activityWindow;
   }
 }
